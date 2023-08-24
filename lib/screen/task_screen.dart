@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/blocs/bloc_exports.dart';
+import 'package:todo_list/screen/my_drawer.dart';
 
 import '../models/task.dart';
 import '../widgets/tasks_list.dart';
@@ -41,14 +42,15 @@ class _TaskScreenState extends State<TaskScreen> {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
+              Center(
                 child: Chip(
-                  label: Text("Task:"),
+                  label: Text("${tasksList.length} Tasks"),
                 ),
               ),
               TasksList(tasksList: tasksList)
             ],
           ),
+          drawer: MyDrawer(),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addTask(context),
             tooltip: "Add Task",

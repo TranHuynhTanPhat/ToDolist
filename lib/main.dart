@@ -35,6 +35,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo_list/screen/task_screen.dart';
+import 'package:todo_list/services/app_route.dart';
+import 'package:todo_list/services/route_paths.dart';
 
 import 'blocs/bloc_exports.dart';
 import 'package:path_provider/path_provider.dart';
@@ -45,22 +47,24 @@ void main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
-  HydratedBloc.storage=storage;
+  HydratedBloc.storage = storage;
 
   // BlocOverrides.runZoned(
   //   () => runApp(const MyApp()),
   // );
-  runApp(const MyApp());
+  runApp(MyApp(
+    appRouter: AppRouter(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.appRouter});
+  final AppRouter appRouter;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          TasksBloc(),
+      create: (context) => TasksBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -68,6 +72,8 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const TaskScreen(),
+        onGenerateRoute: appRouter.onGenerateRoute,
+        initialRoute: TaskScreenId,
       ),
     );
   }
