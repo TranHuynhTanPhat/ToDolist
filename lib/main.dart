@@ -36,6 +36,7 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_list/screen/task_screen.dart';
 import 'package:todo_list/services/app_route.dart';
+import 'package:todo_list/services/app_theme.dart';
 import 'package:todo_list/services/route_paths.dart';
 
 import 'blocs/bloc_exports.dart';
@@ -48,10 +49,6 @@ void main() async {
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
   HydratedBloc.storage = storage;
-
-  // BlocOverrides.runZoned(
-  //   () => runApp(const MyApp()),
-  // );
   runApp(MyApp(
     appRouter: AppRouter(),
   ));
@@ -63,17 +60,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TasksBloc(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TasksBloc(),
         ),
-        home: const TaskScreen(),
-        onGenerateRoute: appRouter.onGenerateRoute,
-        initialRoute: TaskScreenId,
+        BlocProvider(
+          create: (context) => ThemeBloc(),
+        )
+      ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppThemes.appThemeData[AppTheme.lightTheme],
+            darkTheme: AppThemes.appThemeData[AppTheme.dartTheme],
+            themeMode: state.switchTheme?ThemeMode.dark:ThemeMode.light,
+            home: const TaskScreen(),
+            onGenerateRoute: appRouter.onGenerateRoute,
+            initialRoute: TaskScreenId,
+          );
+        },
       ),
     );
   }

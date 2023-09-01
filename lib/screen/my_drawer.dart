@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/blocs/bloc_exports.dart';
-import 'package:todo_list/services/app_route.dart';
 import 'package:todo_list/services/route_paths.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -11,38 +10,51 @@ class MyDrawer extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Drawer(
+        backgroundColor: Theme.of(context).drawerTheme.backgroundColor,
         child: Column(
           children: [
             Container(
-              color: Colors.deepPurple.shade200,
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
               child: Text('Task Drawer',
-                  style: Theme.of(context).textTheme.headline5),
+                  style: Theme.of(context).textTheme.headlineSmall),
             ),
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(TaskScreenId),
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(TaskScreenId),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
-                    title: const Text("My Tasks"),
+                    title:  Text("My Tasks",),
                     trailing: Text("${state.allTasks.length}"),
                   ),
                 );
               },
             ),
-            const Divider(),
+             Divider(color: Theme.of(context).dividerColor,),
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, RecycleBinId),
+                  onTap: () =>
+                      Navigator.pushReplacementNamed(context, RecycleBinId),
                   child: ListTile(
                     leading: const Icon(Icons.delete),
                     title: const Text("Bin"),
                     trailing: Text("${state.removedTasks.length}"),
                   ),
                 );
+              },
+            ),
+            BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                return Switch(
+                    value: state.switchTheme,
+                    onChanged: (newValue) {
+                      newValue
+                          ? context.read<ThemeBloc>().add(SwitchOnEvent())
+                          : context.read<ThemeBloc>().add(SwitchOffEvent());
+                    });
               },
             )
           ],

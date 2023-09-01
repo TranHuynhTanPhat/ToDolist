@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/widgets/tasks_list.dart';
 
 import '../blocs/bloc_exports.dart';
-import '../models/task.dart';
 import 'my_drawer.dart';
 
 class RecycleBin extends StatelessWidget {
@@ -12,7 +11,6 @@ class RecycleBin extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        List<Task> tasksList = state.allTasks;
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
@@ -29,7 +27,7 @@ class RecycleBin extends StatelessWidget {
               TasksList(tasksList: state.removedTasks)
             ],
           ),
-          drawer: MyDrawer(),
+          drawer: const MyDrawer(),
         );
       },
     );

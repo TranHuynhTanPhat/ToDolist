@@ -34,9 +34,14 @@ class _TaskScreenState extends State<TaskScreen> {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: const Text('Task App'),
+            title: const Text(
+              'Task App',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
             actions: [
-              IconButton(onPressed: () => _addTask(context), icon: const Icon(Icons.add))
+              IconButton(
+                  onPressed: () => _addTask(context),
+                  icon: const Icon(Icons.add))
             ],
           ),
           body: Column(
@@ -50,8 +55,9 @@ class _TaskScreenState extends State<TaskScreen> {
               TasksList(tasksList: tasksList)
             ],
           ),
-          drawer: MyDrawer(),
+          drawer: const MyDrawer(),
           floatingActionButton: FloatingActionButton(
+            elevation: 1,
             onPressed: () => _addTask(context),
             tooltip: "Add Task",
             child: const Icon(Icons.add),
@@ -61,4 +67,3 @@ class _TaskScreenState extends State<TaskScreen> {
     );
   }
 }
-

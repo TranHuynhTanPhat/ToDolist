@@ -7,9 +7,9 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case RecycleBinId:
-        return MaterialPageRoute(builder: (_) => RecycleBin());
+        return MaterialPageRoute(builder: (_) => const RecycleBin());
       case TaskScreenId:
-        return MaterialPageRoute(builder: (_) => TaskScreen());
+        return MaterialPageRoute(builder: (_) => const TaskScreen());
       default:
         return null;
     }

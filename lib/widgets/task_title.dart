@@ -35,6 +35,5 @@ class TaskTitle extends StatelessWidget {
       ),
       onLongPress: () => _removeOrDelete(context, task),
     );
-    ;
   }
 }
