@@ -23,11 +23,11 @@ class MyDrawer extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(TaskScreenId),
+                      Navigator.of(context).pushReplacementNamed(MainScreenId),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
-                    title:  Text("My Tasks",),
-                    trailing: Text("${state.allTasks.length}"),
+                    title:  const Text("My Tasks",),
+                    trailing: Text("${state.pendingTasks.length}"),
                   ),
                 );
               },

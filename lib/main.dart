@@ -1,40 +1,6 @@
-// import 'package:flutter/material.dart';
-// import 'package:path_provider/path_provider.dart';
-// import './bloc/bloc_imports.dart';
-// import 'package:todo_list/screen/task_screen.dart';
-
-// Future<void> main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-
-// final storage = await HydratedStorage.build(
-//     storageDirectory: await getApplicationDocumentsDirectory());
-//   HydratedBloc.storage = storage;
-//   Bloc.observer=MyBlocObserver();
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => CounterBloc(),
-//       child: MaterialApp(
-//         title: 'Flutter Demo',
-//         theme: ThemeData(
-// colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-// useMaterial3: true,
-//         ),
-//         home: const HomeScreen(title: 'Flutter Demo Home Page'),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:todo_list/screen/main_screen.dart';
 
-import 'package:todo_list/screen/task_screen.dart';
 import 'package:todo_list/services/app_route.dart';
 import 'package:todo_list/services/app_theme.dart';
 import 'package:todo_list/services/route_paths.dart';
@@ -75,10 +41,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppThemes.appThemeData[AppTheme.lightTheme],
             darkTheme: AppThemes.appThemeData[AppTheme.dartTheme],
-            themeMode: state.switchTheme?ThemeMode.dark:ThemeMode.light,
-            home: const TaskScreen(),
+            themeMode: state.switchTheme ? ThemeMode.dark : ThemeMode.light,
+            home: const MainScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
-            initialRoute: TaskScreenId,
+            initialRoute: MainScreenId,
           );
         },
       ),

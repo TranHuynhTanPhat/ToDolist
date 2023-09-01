@@ -91,6 +91,12 @@ class AppThemes {
       useMaterial3: true,
       textTheme: textTheme,
       dividerColor: const Color(0xff51669e),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Color(0xff3a4d7f),
+        elevation: 1,
+        unselectedItemColor: Color(0xff51669e),
+        selectedItemColor: Colors.white,
+      ),
       drawerTheme: const DrawerThemeData(
           backgroundColor: Color(0xff3a4d7f), surfaceTintColor: Colors.white),
       colorScheme: ColorScheme(
@@ -112,13 +118,19 @@ class AppThemes {
       useMaterial3: true,
       textTheme: textTheme,
       dividerColor: const Color(0xffb5c9cd),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.white,
+        elevation: 10,
+        unselectedItemColor: Color(0xffb5c9cd),
+        selectedItemColor: Color(0xfffdc17a),
+      ),
       drawerTheme: const DrawerThemeData(
           backgroundColor: Colors.white, surfaceTintColor: Colors.black),
       colorScheme: ColorScheme(
         background: const Color(0xfff8fbfb), // background
         onBackground: const Color(0xffb5c9cd),
         primary: const Color(0xfffdc17a), //button
-        onPrimary: Colors.black, // text on button
+        onPrimary: Color(0xff16100a), // text on button
         brightness: Brightness.light,
         secondary: const Color(0xff0f4e5a),
         onSecondary: Colors.white,

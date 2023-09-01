@@ -16,32 +16,60 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   }
 
   FutureOr<void> _onAddTask(AddTask event, Emitter<TasksState> emit) {
-    emit(TasksState(
-        allTasks: List.from(state.allTasks)..add(event.task),
-        removedTasks: state.removedTasks));
+    emit(
+      TasksState(
+        pendingTasks: List.from(state.pendingTasks)..add(event.task),
+        removedTasks: state.removedTasks,
+        favoritedTasks: state.favoritedTasks,
+        completedTasks: state.completedTasks,
+      ),
+    );
   }
 
   FutureOr<void> _onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
     final Task task = event.task;
-    final int index = state.allTasks.indexOf(task);
-    List<Task> allTasks = List.from(state.allTasks)..remove(task);
+    // final int index = state.pendingTasks.indexOf(task);
+    List<Task> pendingTasks = List.from(state.pendingTasks);
+    List<Task> completedTasks = List.from(state.completedTasks);
     task.isDone == false
-        ? allTasks.insert(index, task.copyWith(isDone: true))
-        : allTasks.insert(index, task.copyWith(isDone: false));
-    emit(TasksState(allTasks: allTasks, removedTasks: state.removedTasks));
+        ? {
+            pendingTasks = List.from(state.pendingTasks)..remove(task),
+            completedTasks = List.from(state.completedTasks)
+              ..insert(0, task.copyWith(isDone: true)),
+          }
+        : {
+            completedTasks = List.from(state.completedTasks)..remove(task),
+            pendingTasks = List.from(state.pendingTasks)
+              ..insert(0, task.copyWith(isDone: false)),
+          };
+    emit(
+      TasksState(
+        pendingTasks: pendingTasks,
+        removedTasks: state.removedTasks,
+        favoritedTasks: state.favoritedTasks,
+        completedTasks: completedTasks,
+      ),
+    );
   }
 
   FutureOr<void> _onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
-    emit(TasksState(
-        allTasks: state.allTasks,
-        removedTasks: List.from(state.removedTasks)..remove(event.task)));
+    emit(
+      TasksState(
+        pendingTasks: state.pendingTasks,
+        removedTasks: List.from(state.removedTasks)..remove(event.task),
+        favoritedTasks: state.favoritedTasks,
+        completedTasks: state.completedTasks,
+      ),
+    );
   }
 
   FutureOr<void> _onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
     emit(TasksState(
-        allTasks: List.from(state.allTasks)..remove(event.task),
-        removedTasks: List.from(state.removedTasks)
-          ..add(event.task.copyWith(isDeleted: true))));
+        pendingTasks: List.from(state.pendingTasks)..remove(event.task),
+        removedTasks: List.from(state.removedTasks)..remove(event.task),
+        favoritedTasks: List.from(state.favoritedTasks)..remove(event.task),
+        completedTasks: List.from(state.completedTasks)..remove(event.task),
+      ),);
   }
 
   @override
