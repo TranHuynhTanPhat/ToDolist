@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/res/localization/app_localizations.dart';
 import 'package:todo_list/screen/Favorite_tasks_screen.dart';
 import 'package:todo_list/screen/add_task_screen.dart';
 import 'package:todo_list/screen/completed_tasks_screen.dart';
@@ -13,17 +14,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Map<String, dynamic>> _pageDetail = [
-    {"pageName": const PendingTasksScreen(), "title": "Pending task"},
-    {"pageName": const FavoriteTasksScreen(), "title": "Favorite task"},
-    {"pageName": const CompletedTasksScreen(), "title": "Completed task"},
-  ];
-
   void _addTask(BuildContext context) {
     showModalBottomSheet(
+        enableDrag: true,
+        isScrollControlled: true,
         context: context,
         builder: (context) => SingleChildScrollView(
               child: Container(
+                margin: EdgeInsets.only(top: 50),
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: const AddTaskScreen(),
@@ -35,12 +33,26 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> _pageDetail = [
+      {
+        "pageName": const PendingTasksScreen(),
+        "title": AppLocalizations.of(context).translate('pendingtasks'),
+      },
+      {
+        "pageName": const FavoriteTasksScreen(),
+        "title": AppLocalizations.of(context).translate('favoritetasks')
+      },
+      {
+        "pageName": const CompletedTasksScreen(),
+        "title": AppLocalizations.of(context).translate('completedtasks')
+      },
+    ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(
           _pageDetail[_selectedPage]["title"],
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
           IconButton(

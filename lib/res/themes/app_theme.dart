@@ -97,6 +97,13 @@ class AppThemes {
         unselectedItemColor: Color(0xff51669e),
         selectedItemColor: Colors.white,
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+              Color(0xff51669e),
+            ),
+            foregroundColor: MaterialStateProperty.all(Colors.white)),
+      ),
       drawerTheme: const DrawerThemeData(
           backgroundColor: Color(0xff3a4d7f), surfaceTintColor: Colors.white),
       colorScheme: ColorScheme(
@@ -124,6 +131,7 @@ class AppThemes {
         unselectedItemColor: Color(0xffb5c9cd),
         selectedItemColor: Color(0xfffdc17a),
       ),
+      
       drawerTheme: const DrawerThemeData(
           backgroundColor: Colors.white, surfaceTintColor: Colors.black),
       colorScheme: ColorScheme(

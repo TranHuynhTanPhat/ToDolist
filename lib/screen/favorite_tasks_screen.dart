@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/blocs/bloc_exports.dart';
+import 'package:todo_list/res/localization/app_localizations.dart';
 
 import '../models/task.dart';
 import '../widgets/tasks_list.dart';
@@ -23,7 +24,8 @@ class _FavoriteTasksScreenState extends State<FavoriteTasksScreen> {
             children: [
               Center(
                 child: Chip(
-                  label: Text("${tasksList.length} Tasks"),
+                  label: Text(
+                      "${tasksList.length} ${AppLocalizations.of(context).translate('tasks')}"),
                 ),
               ),
               TasksList(tasksList: tasksList)

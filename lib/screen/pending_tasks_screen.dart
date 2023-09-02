@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/blocs/bloc_exports.dart';
+import 'package:todo_list/res/localization/app_localizations.dart';
 
 import '../models/task.dart';
 import '../widgets/tasks_list.dart';
@@ -24,7 +25,8 @@ class _PendingTasksScreenState extends State<PendingTasksScreen> {
               Center(
                 child: Chip(
                   label: Text(
-                      "${state.pendingTasks.length}/${state.completedTasks.length} Completed"),
+                    "${state.completedTasks.length}/${state.completedTasks.length + state.pendingTasks.length + state.favoritedTasks.length} ${AppLocalizations.of(context).translate('tasks')}",
+                  ),
                 ),
               ),
               TasksList(tasksList: tasksList)

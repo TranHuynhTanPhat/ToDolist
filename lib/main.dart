@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/res/localization/app_localizations_setup.dart';
 import 'package:todo_list/screen/main_screen.dart';
 
 import 'package:todo_list/services/app_route.dart';
-import 'package:todo_list/services/app_theme.dart';
+import 'package:todo_list/res/themes/app_theme.dart';
 import 'package:todo_list/services/route_paths.dart';
-
 import 'blocs/bloc_exports.dart';
 import 'package:path_provider/path_provider.dart';
 // import 'models/task.dart';
@@ -31,11 +31,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TasksBloc(),
         ),
-        BlocProvider(
-          create: (context) => ThemeBloc(),
-        )
+        BlocProvider(create: (context) => ResCubit())
       ],
-      child: BlocBuilder<ThemeBloc, ThemeState>(
+      child: BlocBuilder<ResCubit, ResState>(
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -45,6 +43,10 @@ class MyApp extends StatelessWidget {
             home: const MainScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
             initialRoute: MainScreenId,
+            supportedLocales: AppLocalizationsSetup.supportedLocales,
+            localizationsDelegates:
+                AppLocalizationsSetup.localizationsDelegates,
+            locale: state.locale,
           );
         },
       ),
