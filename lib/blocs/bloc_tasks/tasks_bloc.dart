@@ -13,6 +13,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<UpdateTask>(_onUpdateTask);
     on<DeleteTask>(_onDeleteTask);
     on<RemoveTask>(_onRemoveTask);
+    on<RestoreTask>(_onRestoreTask);
   }
 
   FutureOr<void> _onAddTask(AddTask event, Emitter<TasksState> emit) {
@@ -71,6 +72,31 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           ..add(event.task.copyWith(isDeleted: true)),
         favoritedTasks: List.from(state.favoritedTasks)..remove(event.task),
         completedTasks: List.from(state.completedTasks)..remove(event.task),
+      ),
+    );
+  }
+
+  FutureOr<void> _onRestoreTask(RestoreTask event, Emitter<TasksState> emit) {
+    final Task task = event.task;
+    List<Task> removedTasks = List.from(state.completedTasks)..remove(task);
+    List<Task> pendingTasks = List.from(state.pendingTasks);
+    List<Task> completedTasks = List.from(state.completedTasks);
+    task.isDone == true
+        ? {
+            completedTasks = List.from(state.completedTasks)
+              ..add(task.copyWith(isDeleted: false)),
+          }
+        : {
+            pendingTasks = List.from(state.pendingTasks)
+              ..add(task.copyWith(isDeleted: false)),
+          };
+        print(completedTasks);
+    emit(
+      TasksState(
+        pendingTasks: pendingTasks,
+        removedTasks: removedTasks,
+        favoritedTasks: state.favoritedTasks,
+        completedTasks: completedTasks,
       ),
     );
   }

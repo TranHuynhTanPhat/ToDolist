@@ -67,7 +67,7 @@ class TasksList extends StatelessWidget {
                                   onPressed: () {
                                     context
                                         .read<TasksBloc>()
-                                        .add(AddTask(task: task.copyWith(isDeleted: false)));
+                                        .add(RestoreTask(task: task));
                                     context
                                         .read<TasksBloc>()
                                         .add(DeleteTask(task: task));
