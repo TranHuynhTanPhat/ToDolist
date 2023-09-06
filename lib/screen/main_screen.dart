@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:todo_list/res/localization/app_localizations.dart';
-import 'package:todo_list/screen/Favorite_tasks_screen.dart';
+import 'package:todo_list/screen/favorite_tasks_screen.dart';
 import 'package:todo_list/screen/add_task_screen.dart';
 import 'package:todo_list/screen/completed_tasks_screen.dart';
 import 'package:todo_list/screen/my_drawer.dart';
