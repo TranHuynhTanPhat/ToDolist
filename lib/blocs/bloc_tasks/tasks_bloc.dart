@@ -90,7 +90,6 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
             pendingTasks = List.from(state.pendingTasks)
               ..add(task.copyWith(isDeleted: false)),
           };
-        print(completedTasks);
     emit(
       TasksState(
         pendingTasks: pendingTasks,

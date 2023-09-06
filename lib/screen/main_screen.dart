@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:todo_list/res/localization/app_localizations.dart';
 import 'package:todo_list/screen/Favorite_tasks_screen.dart';
@@ -21,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
         context: context,
         builder: (context) => SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(top: 50),
+                margin: const EdgeInsets.only(top: 50),
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: const AddTaskScreen(),

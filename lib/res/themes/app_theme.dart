@@ -100,7 +100,7 @@ class AppThemes {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-              Color(0xff51669e),
+              const Color(0xff51669e),
             ),
             foregroundColor: MaterialStateProperty.all(Colors.white)),
       ),
@@ -138,7 +138,7 @@ class AppThemes {
         background: const Color(0xfff8fbfb), // background
         onBackground: const Color(0xffb5c9cd),
         primary: const Color(0xfffdc17a), //button
-        onPrimary: Color(0xff16100a), // text on button
+        onPrimary: const Color(0xff16100a), // text on button
         brightness: Brightness.light,
         secondary: const Color(0xff0f4e5a),
         onSecondary: Colors.white,

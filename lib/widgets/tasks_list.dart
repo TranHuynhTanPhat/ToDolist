@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:todo_list/blocs/bloc_exports.dart';
 import 'package:todo_list/res/localization/app_localizations.dart';
@@ -61,7 +63,7 @@ class TasksList extends StatelessWidget {
                               ? IconButton(
                                   onPressed: () {},
                                   icon: const Icon(Icons.edit))
-                              : SizedBox(),
+                              : const SizedBox(),
                           task.isDeleted!
                               ? IconButton(
                                   onPressed: () {
@@ -75,7 +77,7 @@ class TasksList extends StatelessWidget {
                                   icon: const Icon(
                                     Icons.restore,
                                   ))
-                              : SizedBox(),
+                              : const SizedBox(),
                           IconButton(
                               onPressed: () {
                                 _removeOrDelete(context, task);
